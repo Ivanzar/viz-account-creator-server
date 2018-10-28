@@ -130,9 +130,7 @@ function createAccount(name, keysObj, response)
                 if (errMess[1].startsWith('current_delegation >= target_delegation'))
                 {
                     //response.end(JSON.stringify({error: 'current_delegation >= target_delegation'}));
-                    config.blockchain.creator = 'megatester';
-                    config.blockchain.creator_key = '5KN3JswdW53BR6qd9NzN7U98neM5tRW8pL9mgyTSUTtjRFyHcau';
-
+                    
                     return updateDelegation()
                             .then(res => {
                                 return createAccount(name, keysObj, response);
