@@ -28,7 +28,7 @@ function query(q)
     if (!db.connected)
     {        return init().then(res => db.query(q));
     } 
-    return db.query('USE ' + model.config.databse).then(res => db.query(q));
+    return db.query(q);
 }
 
 function init()
