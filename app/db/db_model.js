@@ -18,18 +18,17 @@ var model = {
     {
         date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         return query('SELECT login FROM ' + this.config.table + ' WHERE DATE(date) < DATE("' + date + '")');
-    }
+    },
+    init: init
 };
 
 
 function query(q)
 {
     if (!db.connected)
-    {
-        return init().then(res => db.query(q));
+    {        return init().then(res => db.query(q));
     } 
-
-    return db.query(q);
+    return db.query('USE ' + model.config.databse).then(res => db.query(q));
 }
 
 function init()

@@ -16,6 +16,7 @@ db.connect = function(config, callback)
     function successListener (res)
     {
         removeListners();
+        db.connected = true;
         callback(null, res);
     };
 
@@ -45,9 +46,9 @@ Object.getOwnPropertyNames(db).forEach(name => {
 db.end = function ()
 {
     _client.end();
+    db.connected = false;
 }
 
-db.connected = _client.connected;
-db.connecting = _client.connecting;
+db.connected = false;
 
 module.exports = db;
