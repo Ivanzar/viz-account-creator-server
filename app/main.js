@@ -1,5 +1,4 @@
 const http = require('http');
-const fs = require('fs');
 const crossroads = require('crossroads');
 const util = require('util');
 const viz = require('viz-world-js');
@@ -128,9 +127,7 @@ function createAccount(name, keysObj, response)
                 var errMess = err.payload.error.message.split('\n');
 
                 if (errMess[1].startsWith('current_delegation >= target_delegation'))
-                {
-                    //response.end(JSON.stringify({error: 'current_delegation >= target_delegation'}));
-                    
+                {                    
                     return updateDelegation()
                             .then(res => {
                                 return createAccount(name, keysObj, response);
