@@ -9,6 +9,11 @@ function setModel(model)
     config_model = model;
 }
 
+function getModel()
+{
+    return config_model;
+}
+
 function updateAll()
 {
     return updateConfig(config_model)
@@ -27,20 +32,20 @@ function updateConfig()
 
 function updateDelegation()
 {
-    return viz.api.getChainProperties()
+    return viz.api.getChainPropertiesAsync()
             .then(res => {
 
                 var delegation_ratio = res.create_account_delegation_ratio;
                 var fee = parseFloat(res.account_creation_fee);
 
                 config_model.delegation = delegation_ratio * fee;
-                console.log('Delegation: ' + config_model.delegation);
                 return config_model.delegation;
             });
 }
 
 module.exports = {
     setModel: setModel,
+    getModel: getModel,
     updateAll: updateAll,
     updateConfig: updateConfig,
     updateDelegation: updateDelegation

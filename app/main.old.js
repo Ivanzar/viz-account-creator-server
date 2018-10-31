@@ -3,7 +3,7 @@ const crossroads = require('crossroads');
 const util = require('util');
 const viz = require('viz-world-js');
 const Promise = require("bluebird");
-const db = require('./db');
+const db = require('./db.old');
 
 var config, delegation;
 var resourcesPath = __dirname + '/../resources/';

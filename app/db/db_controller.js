@@ -25,5 +25,6 @@ function getOldAccounts(date)
 module.exports = {
     setModel: setModel,
     addUser: addUser,
+    deleteUser: deleteUser,
     getOldAccounts: getOldAccounts
 }

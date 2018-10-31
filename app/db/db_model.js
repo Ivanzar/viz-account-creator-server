@@ -1,23 +1,30 @@
 const db = require('./db');
+const constant = require('../const');
+const valid = require('../util/valid');
 
 var model = {
     config: {},
     addUser: function (login)
     {
+        if (!valid.isValidAccount(login))
+        {
+            let err = new Error('Invalid account name' + login);
+            err.code = constant.err.public.INVALID_LOGIN;
+
+            throw err;
+        }
+
         return query('INSERT INTO ' + this.config.table + ' (login) VALUES ("' + login + '")');
     },
     deleteUser: function (login)
     {
         return query('DELETE FROM ' + this.config.table + ' WHERE login="' + login + '"');
     },
-    /**
-     * 
-     * @param {Date} date 
-     */
     getOldAccounts: function (date)
     {
         date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-        return query('SELECT login FROM ' + this.config.table + ' WHERE DATE(date) < DATE("' + date + '")');
+        return query('SELECT login FROM ' + this.config.table
+         + ' WHERE DATE(date) < DATE("' + date + '")');
     },
     init: init
 };
@@ -26,7 +33,8 @@ var model = {
 function query(q)
 {
     if (!db.connected)
-    {        return init().then(res => db.query(q));
+    {        
+        return init().then(res => db.query(q));
     } 
     return db.query(q);
 }
@@ -44,7 +52,8 @@ function init()
         return db.query('USE ' + model.config.databse);
     }).then(res => {
         return db.query('CREATE TABLE IF NOT EXISTS ' + model.config.table 
-        + ' (login CHAR(25) PRIMARY KEY, date DATE DEFAULT CURRENT_TIMESTAMP)');
+        + ' (login CHAR('+ constant.account.CHAIN_MAX_ACCOUNT_NAME_LENGTH +') PRIMARY KEY,'
+        + 'date DATE DEFAULT CURRENT_TIMESTAMP)');
     });
 }
 
