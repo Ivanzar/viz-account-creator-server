@@ -1,11 +1,8 @@
-var _controller = require('./db_controller');
+const View = require('../mvc/view');
 
-module.exports = {
-    setController: function (controller){
-        _controller = controller;
-    },
-    setModel: _controller.setModel,
-    addUser: _controller.addUser,
-    deleteUser: _controller.deleteUser,
-    getOldAccounts: _controller.getOldAccounts
-};
+class DBView extends View
+{
+    
+}
+
+module.exports = DBView;

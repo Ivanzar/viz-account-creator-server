@@ -1,15 +1,33 @@
-var _controller = require('./config_controller');
-var _model = require('./config_model');
+'use strict';
 
-_controller.setModel(_model);
+const View = require('../mvc/view');
 
-module.exports = {
-    setController: function (controller){
-        _controller = controller;
-    },
-    setModel: _controller.setModel,
-    getModel: _controller.getModel,
-    updateAll: _controller.updateAll,
-    updateConfig: _controller.updateConfig,
-    updateDelegation: _controller.updateDelegation
-};
+class ConfigView extends View
+{
+    updateConfig()
+    {
+        return this.getController().updateConfig();
+    }
+
+    getConfig()
+    {
+        return this.getController().getConfig();
+    }
+
+    updateDelegation()
+    {
+        return this.getController().updateDelegation();
+    }
+
+    getDelegation()
+    {
+        return this.getController().getDelegation()
+    }
+
+    updateAll()
+    {
+        return this.getController().updateAll();
+    }
+}
+
+module.exports = ConfigView;

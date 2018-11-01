@@ -9,7 +9,7 @@ module.exports = {
     isValidAccount: function (name) {
         let len = name.length;
 
-        if (len < _constant.account.CHAIN_MIN_CREATE_ACCOUNT_NAME_LENGTH) {
+        if (len < _constant.account.CHAIN_MIN_ACCOUNT_NAME_LENGTH) {
             return false;
         }
 

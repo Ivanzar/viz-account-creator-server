@@ -1,11 +1,7 @@
 var account = {}
 
 account.CHAIN_MIN_ACCOUNT_NAME_LENGTH = 2;
-account.CHAIN_MIN_CREATE_ACCOUNT_NAME_LENGTH = 3;
 account.CHAIN_MAX_ACCOUNT_NAME_LENGTH = 25;
-
-var server = {};
-server.UPDATE_DELEGATION_INTERVAL = 3*1000;
 
 var err = {}
 
@@ -33,10 +29,8 @@ err.public.TEST = -7878;
 
 Object.freeze(err);
 Object.freeze(account);
-Object.freeze(server);
 
 module.exports = {
     account: account,
-    err: err,
-    server: server
+    err: err
 };
