@@ -1,4 +1,10 @@
 {
-    "creator": "",
-    "creator_key": ""
+    "blockchain": {
+        "creator": "login",
+        "creator_key": "active_priv_key"
+    },
+    "server": {
+        "refund_interval_day": "7",
+        "port": 8124
+    }
 }
