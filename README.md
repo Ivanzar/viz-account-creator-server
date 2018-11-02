@@ -1,7 +1,7 @@
 # viz-account-creator-server
 RESTful сервер для регистрации пользователей в VIZ.
 
-Чтобы запустить сервер вам потребудется [установить Node.js](https://nodejs.org/en/download/package-manager/) и npm.
+Чтобы запустить сервер вам потребуется [установить Node.js](https://nodejs.org/en/download/package-manager/) и npm.
 
 Npm идет в комплекте с Node.js
 
@@ -9,31 +9,31 @@ Npm идет в комплекте с Node.js
 
 ## Настройки
 
-Перейдите в  ``resources/config/config.json``
+Перейдите в resources/config/config.json
 
-```json
+json
 {
-    "blockchain": {
-        "creator": "account_name",
-        "creator_key": "active_wif"
-    },
-    "server": {
-        "refund_interval_day": 7,
-        "port": 8124,
-        "node": "node_url"
-    }
+"blockchain": {
+"creator": "account_name",
+"creator_key": "active_wif"
+},
+"server": {
+"refund_interval_day": 7,
+"port": 8124,
+"node": "node_url"
 }
-```
+}
 
-``creator`` - Аккаунт регистратора
 
-``active_priv_key`` - Активный приватный ключ регистратора
+creator - Аккаунт регистратора
 
-``refund_interval_day`` - Цикл возврата средств с созанного аккаутна
+active_priv_key - Активный приватный ключ регистратора
 
-``port`` - Порт на котором будет работать сервер
+refund_interval_day - Цикл возврата средств с созданного аккаунта
 
-``node`` - URL ноды для связи в блокчейном VIZ. Должна поддерживать WS протокол
+port - Порт на котором будет работать сервер
+
+node  - URL ноды для связи c блокчейном VIZ. Должна поддерживать WS протокол
 
 ## Запуск
 
@@ -41,7 +41,7 @@ Npm идет в комплекте с Node.js
 
 ``$ npm run start``
 
-В случае сбоя сервер будет атоматически перезапущен благодаря модулю forever
+В случае сбоя сервер будет автоматически перезапущен благодаря модулю forever
 
 ## Остановка
 
@@ -51,7 +51,7 @@ Npm идет в комплекте с Node.js
 
 ``/api/broadcast/account/create/{login}?memo={memo_key}&active={active_key}&posting={posting_key}&owner={owner_key}``
 
-``{login}``  - Логин нового пользователя
+``{login}`` - Логин нового пользователя
 
 ``{memo_key}`` - Публичный memo ключ для нового аккаунта
 
