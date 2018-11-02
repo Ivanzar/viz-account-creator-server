@@ -11,29 +11,30 @@ Npm идет в комплекте с Node.js
 
 Перейдите в resources/config/config.json
 
-json
+```json
 {
-"blockchain": {
-"creator": "account_name",
-"creator_key": "active_wif"
-},
-"server": {
-"refund_interval_day": 7,
-"port": 8124,
-"node": "node_url"
+    "blockchain": {
+        "creator": "account_name",
+        "creator_key": "active_wif"
+    },
+    "server": {
+        "refund_interval_day": 7,
+        "port": 8124,
+        "node": "node_url"
+    }
 }
-}
+```
 
 
-creator - Аккаунт регистратора
+``creator`` - Аккаунт регистратора
 
-active_priv_key - Активный приватный ключ регистратора
+``active_priv_key`` - Активный приватный ключ регистратора
 
-refund_interval_day - Цикл возврата средств с созданного аккаунта
+``refund_interval_day`` - Цикл возврата средств с созданного аккаунта
 
-port - Порт на котором будет работать сервер
+``port`` - Порт на котором будет работать сервер
 
-node  - URL ноды для связи c блокчейном VIZ. Должна поддерживать WS протокол
+``node``  - URL ноды для связи c блокчейном VIZ. Должна поддерживать WS протокол
 
 ## Запуск
 
