@@ -44,7 +44,7 @@ class ConfigModel extends Model
     updateAll()
     {
         return this.updateConfig()
-                .then(res => this.updateDelegation());
+                .then(res => this.updateDelegation().then(res => this));
     }
 }
 

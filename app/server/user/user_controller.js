@@ -30,6 +30,11 @@ class UserController extends Controller
     {
         return this.getModel().createAccount(login, keys, this.getConfigModel());
     }
+
+    refundSharesFromOldAccounts()
+    {
+        return this.getModel().refundSharesFromOldAccounts(this.getConfigModel())
+    }
 }
 
 module.exports = UserController;

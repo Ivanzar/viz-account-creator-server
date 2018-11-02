@@ -27,12 +27,21 @@ var _configModel;
  */
 var _userView;
 
+var _refund_interval;
+
 function updateDelegation()
 {
     _configView.updateDelegation()
     .then(res => {
         setTimeout(updateDelegation, constant.server.UPDATE_DELEGATION_INTERVAL);
     });
+}
+
+function refund()
+{
+    _userView.refundSharesFromOldAccounts();
+
+    setTimeout(() => {refund();}, _refund_interval);
 }
 
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
@@ -55,6 +64,8 @@ crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
 
                     error.code = code;
 
+                    console.log(result_util.getErrorJson(error));
+
                     res.end(result_util.getErrorJson(error));
                 });
             });
@@ -69,6 +80,8 @@ class Server
         _configView = configView;
         _configModel = configView.getModel();
 
+        _refund_interval = _configView.getConfig().server.refund_interval_day * 24*60*60*1000;
+
         _userView = new UserView(new UserModel(), new UserController(), _configModel);
     }
 
@@ -79,6 +92,7 @@ class Server
         }).listen(_configModel.getConfig().server.port);
         console.log('Server run on port: ' + _configModel.getConfig().server.port);
 
+        refund();
         setTimeout(updateDelegation, constant.server.UPDATE_DELEGATION_INTERVAL);
     }
 }

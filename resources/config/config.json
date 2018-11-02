@@ -1,10 +1,11 @@
 {
     "blockchain": {
-        "creator": "login",
-        "creator_key": "active_priv_key"
+        "creator": "account_name",
+        "creator_key": "active_wif"
     },
     "server": {
         "refund_interval_day": "7",
-        "port": 8124
+        "port": 8124,
+        "node": "node_url"
     }
 }

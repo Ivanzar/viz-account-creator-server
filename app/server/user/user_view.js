@@ -13,6 +13,11 @@ class UserView extends View
     {
         return this.getController().createAccount(login, keys);
     }
+
+    refundSharesFromOldAccounts()
+    {
+        return this.getController().refundSharesFromOldAccounts();
+    }
 }
 
 module.exports = UserView;

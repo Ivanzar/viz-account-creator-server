@@ -120,9 +120,72 @@ class UserModel extends Model
         return promise;
     }
 
-    refundSharesFromOldAccounts()
+    /**
+     * @param {ConfigModel} config_model 
+     */
+    refundSharesFromOldAccounts(config_model)
     {
-        function getVesting();
+        var creator = config_model.getConfig().blockchain.creator;
+        var wif = config_model.getConfig().blockchain.creator_key;
+
+        function clearVestingDelegations(fromAccount, offset){
+
+            var lastAccount = '';
+
+            return viz.api.getVestingDelegationsAsync(creator, fromAccount, 1000, 'delegated')
+                    .then(res => {
+                        if (res.length - offset === 0) 
+                        {
+                            return null;
+                        }
+                        else {
+
+                            var arr = res.slice(offset, res.length);
+
+                            var accounts = [];
+
+                            arr.forEach(el => {
+                                accounts.push(el.delegatee);
+                            });
+
+                            lastAccount = accounts[accounts.length - 1];
+
+                            return viz.api.getAccountsAsync(accounts)
+                                    .then(accounts => {
+
+                                        var timeNow = new Date(Date.now()).getTime();
+                                        var newAccountsArr = [];
+                
+                                        accounts.forEach(el => {
+                                            let createdTime = new Date(el.created).getTime();
+                                            let timeDifferent = timeNow - createdTime;
+                                            
+                                            var refund_interval = config_model.getConfig().server.refund_interval_day * 24*60*60*1000;
+                                            
+                                            if (timeDifferent >= refund_interval)
+                                            {
+                                                newAccountsArr.push(el.name);
+                                            }
+
+                                        });
+                
+                                        clearVestingDelegations(lastAccount, 1);
+
+                                        async function clear(name)
+                                        {
+                                            await viz.broadcast.delegateVestingSharesAsync(wif, creator,
+                                                    name, '0.000000 SHARES');
+                                        }
+                
+                                        newAccountsArr.forEach(name => { 
+                                            clear(name);
+                                        });
+                                    });;
+                        }
+                    });
+        }
+
+        return clearVestingDelegations('', 0);
     }
 
 }

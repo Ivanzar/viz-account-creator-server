@@ -32,6 +32,9 @@ RESTful сервер для регистрации пользователей в
 ``/api/broadcast/account/create/{login}?memo={memo_key}&active={active_key}&posting={posting_key}&owner={owner_key}``
 
 ``memo_key`` - Публичный memo ключ для нового аккаунта
+
 ``posting_key`` - Публичный постинг ключ для нового аккаунта
+
 ``active_key`` - Публичный активный ключ для нового аккаунта
+
 ``owner_key`` - Публичный owner ключ для нового аккаунта
