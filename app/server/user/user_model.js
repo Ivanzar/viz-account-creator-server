@@ -83,7 +83,6 @@ class UserModel extends Model
 
             return true;
         }).then(res => {
-            console.log('BEF accountCreateAsync');
             return viz.broadcast.accountCreateAsync(
                 wif, fee, delegation,
                 creator, newAccountName,

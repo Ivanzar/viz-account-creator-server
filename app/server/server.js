@@ -46,7 +46,6 @@ function refund()
 
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
             (req, res, login, keys) => {
-                console.log('=====PARSE=====' + req.url);
                 _userView.createAccount(login, keys)
                 .then(result => {
                     console.log(result);
@@ -68,15 +67,15 @@ crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
 
                     error.code = code;
 
-                    // if (code === constant.err.public.UNKNOWN)
-                    // {
-                    //     console.error('#### ERROR LOG START ####');
-                    //     console.error('Err mes: ' + error.message);
-                    //     console.error('Err code: ' + error.code);
-                    //     console.error(JSON.stringify(error));
-                    //     console.error(error);
-                    //     console.error('==== ERROR LOG END ====');
-                    // }
+                    if (code === constant.err.public.UNKNOWN)
+                    {
+                        console.error('#### ERROR LOG START ####');
+                        console.error('Err mes: ' + error.message);
+                        console.error('Err code: ' + error.code);
+                        console.error(JSON.stringify(error));
+                        console.error(error);
+                        console.error('==== ERROR LOG END ====');
+                    }
 
                     res.end(result_util.getErrorJson(error));
                 });
