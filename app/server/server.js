@@ -46,14 +46,18 @@ function refund()
 
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
             (req, res, login, keys) => {
+                console.log('=====PARSE=====' + req.url);
                 _userView.createAccount(login, keys)
                 .then(result => {
+                    console.log(result);
                     res.end(result_util.getSuccessJson(result));
                 }).catch(error => {
-                    console.log('Err mes: ' + error.message);
-                    console.log('Err code: ' + error.code);
-                    console.log(JSON.stringify(error));
-                    console.log(error);
+                    // console.error('#### ERROR LOG START ####');
+                    // console.error('Err mes: ' + error.message);
+                    // console.error('Err code: ' + error.code);
+                    // console.error(JSON.stringify(error));
+                    // console.error(error);
+                    // console.error('==== ERROR LOG END ====');
 
                     var code = constant.err.public.UNKNOWN;
 
@@ -64,7 +68,15 @@ crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
 
                     error.code = code;
 
-                    console.log(result_util.getErrorJson(error));
+                    // if (code === constant.err.public.UNKNOWN)
+                    // {
+                    //     console.error('#### ERROR LOG START ####');
+                    //     console.error('Err mes: ' + error.message);
+                    //     console.error('Err code: ' + error.code);
+                    //     console.error(JSON.stringify(error));
+                    //     console.error(error);
+                    //     console.error('==== ERROR LOG END ====');
+                    // }
 
                     res.end(result_util.getErrorJson(error));
                 });
@@ -88,6 +100,10 @@ class Server
     start()
     {
         http.createServer((req, res) => {
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
+            console.log(req.url);
+            crossroads.ignoreState = true;
             crossroads.parse(req.url, [req, res])
         }).listen(_configModel.getConfig().server.port);
         console.log('Server run on port: ' + _configModel.getConfig().server.port);

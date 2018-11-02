@@ -83,6 +83,7 @@ class UserModel extends Model
 
             return true;
         }).then(res => {
+            console.log('BEF accountCreateAsync');
             return viz.broadcast.accountCreateAsync(
                 wif, fee, delegation,
                 creator, newAccountName,
@@ -95,6 +96,8 @@ class UserModel extends Model
             err.payload = error.payload;
 
             var errMessage = err.message;
+            // console.log('EERRRRRRRRVVRPV<PR<VPVP<');
+            // console.log(err);
 
             if (errMessage.startsWith('Assert Exception (10)\ncurrent_delegation >= target_delegation'))
             {
@@ -112,6 +115,11 @@ class UserModel extends Model
             if (errMessage.startsWith('could not insert object, most likely a uniqueness constraint was violated'))
             {
                 err.code = constant.err.public.ACCOUNT_EXIST;
+            }
+
+            if (errMessage.startsWith('transaction.operations = account_create'))
+            {
+                err.code = constant.err.public.BCH_KEY_NOT_BEGIN_WITH_VIZ;
             }
 
             throw err;

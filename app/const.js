@@ -13,23 +13,24 @@ err.public = {}
 err.db = {}
 err.bch = {}
 
-err.bch.BCH_PRIVATE_KEY_REQUIRED = 1403;
+err.bch.BCH_PRIVATE_KEY_REQUIRED = 11403;
 
-err.db.DB_ER_DUP_ENTRY = 1062;
-err.db.DB_ER_DISK_FULL = 1021;
+err.db.DB_ER_DUP_ENTRY = 21062;
+err.db.DB_ER_DISK_FULL = 21021;
 
-err.public.UNKNOWN = -7575;
+err.public.UNKNOWN = -57575;
 err.public.OK = 0;
-err.public.INVALID_LOGIN = 1;
+err.public.INVALID_LOGIN = 51401;
 
 err.public.SERVER_API_NOT_FOUND = 404;
 
-err.public.BCH_INSUFFICIENT_FUNDS = 1401;
-err.public.BCH_INVALID_PUB_KEY = 1402;
+err.public.BCH_INSUFFICIENT_FUNDS = 51402;
+err.public.BCH_INVALID_PUB_KEY = 51403;
+err.public.BCH_KEY_NOT_BEGIN_WITH_VIZ = 51404;
 
-err.public.ACCOUNT_EXIST = 1501;
+err.public.ACCOUNT_EXIST = 51501;
 
-err.public.TEST = -7878;
+err.public.TEST = -57878;
 
 Object.freeze(err);
 Object.freeze(account);

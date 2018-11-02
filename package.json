@@ -16,7 +16,8 @@
     },
     "scripts": {
         "test": "test/test.js",
-        "start": "node app/main.js"
+        "start": "forever -a --uid viz-creator -o out.log -e err.log app/index.js",
+        "stop": "forever stop viz-creator"
     },
     "engines": {
         "node": ">=8.11.4",
