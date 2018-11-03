@@ -18,7 +18,7 @@ Npm идет в комплекте с Node.js
         "creator_key": "active_wif"
     },
     "server": {
-        "refund_interval_day": 7,
+        "refund_interval_sec": 7,
         "port": 8124,
         "node": "node_url"
     }
@@ -30,7 +30,7 @@ Npm идет в комплекте с Node.js
 
 ``active_priv_key`` - Активный приватный ключ регистратора
 
-``refund_interval_day`` - Цикл возврата средств с созданного аккаунта
+``refund_interval_sec`` - Цикл возврата средств с созданного аккаунта
 
 ``port`` - Порт на котором будет работать сервер
 

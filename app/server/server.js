@@ -39,9 +39,10 @@ function updateDelegation()
 
 function refund()
 {
-    _userView.refundSharesFromOldAccounts();
-
-    setTimeout(() => {refund();}, _refund_interval);
+    _userView.refundSharesFromOldAccounts()
+    .then(res => {
+        setTimeout(() => {refund();}, _refund_interval);
+    });
 }
 
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
@@ -91,7 +92,7 @@ class Server
         _configView = configView;
         _configModel = configView.getModel();
 
-        _refund_interval = _configView.getConfig().server.refund_interval_day * 24*60*60*1000;
+        _refund_interval = _configView.getConfig().server.refund_interval_sec * 1000;
 
         _userView = new UserView(new UserModel(), new UserController(), _configModel);
     }

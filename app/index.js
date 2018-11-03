@@ -13,6 +13,7 @@ configView.updateConfig()
 .then(res => {
     var node = res.server.node;
     viz.config.set('websocket', node);
+    console.log('Refund interval ' + res.server.refund_interval_sec + ' sec.');
     console.log('API node: ' + viz.config.get('websocket'));
 
     return configView.updateDelegation();
