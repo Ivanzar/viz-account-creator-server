@@ -45,13 +45,6 @@ function refund()
     });
 }
 
-crossroads.addRoute('/',
-            (req, res) => {
-                var error = new Error();
-                error.code = constant.err.public.SERVER_API_NOT_FOUND;
-                res.end(result_util.getErrorJson(error));
-            });
-
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
             (req, res, login, keys) => {
                 _userView.createAccount(login, keys)
@@ -97,6 +90,13 @@ crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
                     res.end(result_util.getErrorJson(error));
                 });
             });
+
+crossroads.addRoute(':rest*:',
+                    (req, res) => {
+                        var error = new Error();
+                        error.code = constant.err.public.SERVER_API_NOT_FOUND;
+                        res.end(result_util.getErrorJson(error));
+                    });
 
 class Server
 {
