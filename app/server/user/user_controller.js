@@ -35,6 +35,11 @@ class UserController extends Controller
     {
         return this.getModel().refundSharesFromOldAccounts(this.getConfigModel())
     }
+
+    removeSharesFromAccount(name)
+    {
+        return this.getModel().removeSharesFromAccount(name, this.getConfigModel())
+    }
 }
 
 module.exports = UserController;

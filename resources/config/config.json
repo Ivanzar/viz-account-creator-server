@@ -4,7 +4,8 @@
         "creator_key": "active_wif"
     },
     "server": {
-        "refund_interval_sec": 604800,
+        "host": "127.0.0.1",
+        "refund_interval_sec": 0,
         "port": 8124,
         "node": "node_url"
     }

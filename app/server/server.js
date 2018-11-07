@@ -45,12 +45,28 @@ function refund()
     });
 }
 
+crossroads.addRoute('/',
+            (req, res) => {
+                var error = new Error();
+                error.code = constant.err.public.SERVER_API_NOT_FOUND;
+                res.end(result_util.getErrorJson(error));
+            });
+
 crossroads.addRoute('/api/broadcast/account/create/{login}{?keys}',
             (req, res, login, keys) => {
                 _userView.createAccount(login, keys)
                 .then(result => {
-                    console.log(result);
+                    //console.log(result);
+
+                    //console.log(result.operations[0][1].new_account_name);
+
                     res.end(result_util.getSuccessJson(result));
+
+                    if (_refund_interval <= 0)
+                    {
+                        _userView.removeSharesFromAccount(result.operations[0][1].new_account_name);
+                    }
+
                 }).catch(error => {
                     // console.error('#### ERROR LOG START ####');
                     // console.error('Err mes: ' + error.message);
@@ -102,14 +118,18 @@ class Server
         http.createServer((req, res) => {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
-            console.log(req.url);
+            //console.log(req.url);
             crossroads.ignoreState = true;
             crossroads.parse(req.url, [req, res])
-        }).listen(_configModel.getConfig().server.port);
-        console.log('Server run on port: ' + _configModel.getConfig().server.port);
+        }).listen(_configModel.getConfig().server.port, _configModel.getConfig().server.host);
+        console.log('Server run on: ' + _configModel.getConfig().server.host+':'+_configModel.getConfig().server.port);
 
-        refund();
-        setTimeout(updateDelegation, constant.server.UPDATE_DELEGATION_INTERVAL);
+
+        if (_refund_interval > 0)
+        {
+            refund();
+            setTimeout(updateDelegation, constant.server.UPDATE_DELEGATION_INTERVAL);
+        }
     }
 }
 

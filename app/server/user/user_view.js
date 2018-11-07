@@ -18,6 +18,11 @@ class UserView extends View
     {
         return this.getController().refundSharesFromOldAccounts();
     }
+
+    removeSharesFromAccount(name)
+    {
+        return this.getController().removeSharesFromAccount(name);
+    }
 }
 
 module.exports = UserView;
